@@ -215,7 +215,7 @@ function setP(pid,bid,pct){const p=document.getElementById(pid);const b=document
 function parseDt(ds){if(!ds)return null;if(ds.includes('-')){const p=ds.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}const p=ds.split('/');return p.length===3?new Date(+p[2],+p[1]-1,+p[0]):null;}
 
 async function extract(b64,mime){
-  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mime,data:b64}},{type:'text',text:'Extract from this invoice. Return ONLY valid JSON:\n{"date":"DD/MM/YYYY","supplier":"name","invoiceNum":"ref","total":0,"gst":0,"subtotal":0,"lineItems":[{"desc":"item","qty":1,"unit":"","unitPrice":0,"amount":0}]}\nUse 0 for missing numbers. Return ONLY the JSON.'}]}]})});
+  const r=await fetch('https://workers-playground-shiny-cake-977a.ginataywl.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mime,data:b64}},{type:'text',text:'Extract from this invoice. Return ONLY valid JSON:\n{"date":"DD/MM/YYYY","supplier":"name","invoiceNum":"ref","total":0,"gst":0,"subtotal":0,"lineItems":[{"desc":"item","qty":1,"unit":"","unitPrice":0,"amount":0}]}\nUse 0 for missing numbers. Return ONLY the JSON.'}]}]})});
   const d=await r.json();
   return JSON.parse(d.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim());
 }
