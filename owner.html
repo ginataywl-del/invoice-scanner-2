@@ -462,7 +462,7 @@ function fmtDt(d){if(!d)return'';const dt=typeof d==='string'?new Date(d):d;retu
 function sendPromptFn(t){if(window.sendPrompt)window.sendPrompt(t);else alert('Open this in Claude.ai to use the Ask Claude feature.');}
 
 async function callAI(messages,maxTok){
-  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTok||1200,messages})});
+  const r=await fetch('https://lucky-pike-26.ginataywl-del.deno.net',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTok||1200,messages})});
   const d=await r.json();
   return d.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
 }
