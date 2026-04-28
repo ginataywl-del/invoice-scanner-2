@@ -120,7 +120,28 @@
 
       <!-- BULK -->
       <div id="bulk-zone">
-        <div class="upload-zone" onclick="document.getElementById('bulk-fi').click()" ondragover="event.preventDefault()" ondrop="event.preventDefault();handleBulk(event.dataTransfer.files)">
+        
+<div id="test-bar" style="padding:8px;background:#f0f0f0;font-size:12px;margin-bottom:10px;border-radius:8px;display:none"></div>
+<script>
+async function testProxy(){
+  const bar = document.getElementById('test-bar');
+  bar.style.display='block';
+  bar.textContent='Testing connection...';
+  try{
+    const r = await fetch('https://lucky-pike-26.ginataywl-del.deno.net',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:10,messages:[{role:'user',content:'hi'}]})
+    });
+    const d = await r.json();
+    if(d.content) bar.style.background='#d4edda', bar.textContent='Connection OK! Proxy is working.';
+    else bar.style.background='#f8d7da', bar.textContent='Proxy error: '+JSON.stringify(d);
+  }catch(e){
+    bar.style.background='#f8d7da';
+    bar.textContent='Connection failed: '+e.message;
+  }
+}
+</script><button onclick="testProxy()" style="margin-bottom:8px;padding:6px 12px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;font-size:12px">Test connection first</button><br><div class="upload-zone" onclick="document.getElementById('bulk-fi').click()" ondragover="event.preventDefault()" ondrop="event.preventDefault();handleBulk(event.dataTransfer.files)">
           <input type="file" id="bulk-fi" accept="image/*,application/pdf" multiple style="display:none" onchange="handleBulk(this.files)">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 10px;display:block;color:var(--text3)"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           <p style="font-size:14px;font-weight:500;margin-bottom:4px">Tap to select photos</p>
