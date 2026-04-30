@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head><title>Download owner.html</title></head>
+<body style="font-family:sans-serif;padding:40px;text-align:center">
+<h2>Click below to download owner.html</h2>
+<p style="color:#666;margin:10px 0 30px">Then upload it to GitHub</p>
+<script>
+const code = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Manager — Owner</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f7f7f5;--bg3:#efefec;
+  --text:#1a1a1a;--text2:#6b6b6b;--text3:#a0a0a0;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.16);
+  --info-bg:#EBF4FD;--info:#0C447C;
+  --success-bg:#EAF3DE;--success:#27500A;
+  --warn-bg:#FAEEDA;--warn:#633806;
+  --danger-bg:#FCEBEB;--danger:#791F1F;
+  --purple-bg:#EEEDFE;--purple:#3C3489;
+  --radius:8px;--radius-lg:12px;
+  --font:'Segoe UI',system-ui,sans-serif;--mono:'Courier New',monospace;
+}
+body{font-family:var(--font);font-size:14px;background:var(--bg3);color:var(--text);min-height:100vh}
+.shell{max-width:820px;margin:0 auto;padding:16px}
+.pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.pin-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:300px;text-align:center}
+.pin-title{font-size:18px;font-weight:600;margin-bottom:4px}
+.pin-sub{font-size:13px;color:var(--text2);margin-bottom:20px}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:20px}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border2);transition:all 0.15s}
+.pin-dot.filled{background:var(--text);border-color:var(--text)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.pin-key{padding:14px;border-radius:var(--radius);border:0.5px solid var(--border);background:var(--bg2);font-size:18px;font-weight:500;cursor:pointer;transition:all 0.15s;color:var(--text)}
+.pin-key:hover{background:var(--bg3)}
+.pin-key:active{transform:scale(0.95)}
+.pin-error{font-size:12px;color:var(--danger);margin-top:8px;min-height:18px}
+.header{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:13px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:15px;font-weight:600}
+.role-badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;background:var(--purple-bg);color:var(--purple)}
+.tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:8px 13px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all 0.15s;flex-shrink:0}
+.tab.active{color:var(--text);border-bottom-color:var(--text)}
+.panel{display:none}.panel.active{display:block}
+.btn{padding:7px 13px;border-radius:var(--radius);font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:transparent;color:var(--text);transition:all 0.15s;font-family:var(--font)}
+.btn:hover{background:var(--bg2)}
+.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.primary:hover{opacity:0.85}
+.btn.green{background:var(--success-bg);color:var(--success);border-color:var(--success)}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:9px}
+.field label{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em}
+.field input,.field select,.field textarea{padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font);width:100%}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:12px}
+.metric{background:var(--bg2);border-radius:var(--radius);padding:10px 12px}
+.mlabel{font-size:11px;color:var(--text2);margin-bottom:2px}
+.mval{font-size:18px;font-weight:600;color:var(--text)}
+.msub{font-size:11px;color:var(--text3);margin-top:1px}
+.st{padding:8px 12px;border-radius:var(--radius);font-size:12px;margin-bottom:10px;display:none}
+.st.info{background:var(--info-bg);color:var(--info);display:block}
+.st.success{background:var(--success-bg);color:var(--success);display:block}
+.st.error{background:var(--danger-bg);color:var(--danger);display:block}
+.st.warn{background:var(--warn-bg);color:var(--warn);display:block}
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
+.frow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:7px 9px;font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;border-bottom:0.5px solid var(--border);white-space:nowrap}
+td{padding:7px 9px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:500}
+.badge.warn{background:var(--warn-bg);color:var(--warn)}
+.badge.danger{background:var(--danger-bg);color:var(--danger)}
+.badge.ok{background:var(--success-bg);color:var(--success)}
+.badge.info{background:var(--info-bg);color:var(--info)}
+.bpill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:500;background:var(--info-bg);color:var(--info)}
+.src-tag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500}
+.src-drive{background:#E8F5E9;color:#1B5E20}
+.src-manual{background:#EEEDFE;color:#3C3489}
+.src-soa{background:#FAEEDA;color:#633806}
+.empty{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px}
+.expand-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:10px 13px;background:var(--bg2);border-radius:var(--radius);margin-bottom:5px}
+.expand-body{display:none;padding:0 4px 8px}
+.expand-body.open{display:block}
+.alert-item{border-left:3px solid;padding:8px 12px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:8px;background:var(--bg2)}
+.alert-item.up{border-color:#E24B4A}
+.alert-item.diff{border-color:#BA7517}
+.gdrive-file{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:6px;background:var(--bg)}
+.gdrive-file:hover{background:var(--bg2)}
+.progress{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:8px;display:none}
+.progress.on{display:block}
+.progress-bar{height:100%;background:var(--text);transition:width 0.3s;width:0%}
+.li-row{display:flex;gap:5px;align-items:center;margin-bottom:5px}
+.li-row input{padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)}
+.del-btn{padding:4px 7px;border:0.5px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--text3);cursor:pointer;font-size:11px}
+.del-btn:hover{background:var(--danger-bg);color:var(--danger)}
+.soa-missing{background:var(--danger-bg);border-radius:var(--radius);padding:11px 13px;margin-bottom:8px}
+.soa-ok{background:var(--success-bg);border-radius:var(--radius);padding:7px 11px;margin-bottom:4px}
+.soa-extra{background:var(--warn-bg);border-radius:var(--radius);padding:7px 11px;margin-bottom:4px}
+.ts-high{color:var(--danger);font-weight:500}
+.ts-med{color:var(--warn);font-weight:500}
+.ts-ok{color:var(--success)}
+.ts-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.ts-dot.high{background:#E24B4A}.ts-dot.med{background:#BA7517}.ts-dot.low{background:#639922}
+.setup-box{background:var(--bg2);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
+.setup-box h3{font-size:13px;font-weight:600;margin-bottom:8px}
+.setup-box p{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:6px}
+.sync-banner{background:linear-gradient(135deg,#1a1a1a,#2d2d2d);color:white;border-radius:var(--radius-lg);padding:20px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sync-banner h2{font-size:15px;font-weight:600;margin-bottom:4px}
+.sync-banner p{font-size:12px;opacity:0.7}
+</style>
+</head>
+<body>
+<div class="pin-screen" id="pin-screen">
+  <div class="pin-card">
+    <div style="width:44px;height:44px;border-radius:50%;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--purple)"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="pin-title">Owner Portal</div>
+    <div class="pin-sub">Enter PIN to continue</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pk('1')">1</button><button class="pin-key" onclick="pk('2')">2</button><button class="pin-key" onclick="pk('3')">3</button>
+      <button class="pin-key" onclick="pk('4')">4</button><button class="pin-key" onclick="pk('5')">5</button><button class="pin-key" onclick="pk('6')">6</button>
+      <button class="pin-key" onclick="pk('7')">7</button><button class="pin-key" onclick="pk('8')">8</button><button class="pin-key" onclick="pk('9')">9</button>
+      <button class="pin-key" style="font-size:12px" onclick="pc()">Clear</button>
+      <button class="pin-key" onclick="pk('0')">0</button>
+      <button class="pin-key" style="font-size:13px" onclick="pb()">&#9003;</button>
+    </div>
+    <div class="pin-error" id="pin-err"></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:10px">Default PIN: 1234</div>
+  </div>
+</div>
+<div id="app" style="display:none">
+<div class="shell">
+  <div class="header">
+    <div><div class="logo">Invoice Manager</div><div style="font-size:11px;color:var(--text2);margin-top:1px">Owner · Full access</div></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="role-badge">Owner</span>
+      <button class="btn" style="font-size:11px;padding:4px 9px" onclick="lockApp()">Lock</button>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="sw('drive')">Google Drive Sync</button>
+    <button class="tab" onclick="sw('manual')">Manual Entry</button>
+    <button class="tab" onclick="sw('records')">All Records</button>
+    <button class="tab" onclick="sw('soa')">SOA Reconcile</button>
+    <button class="tab" onclick="sw('items')">Item Costs</button>
+    <button class="tab" onclick="sw('monthly')">Monthly</button>
+    <button class="tab" onclick="sw('compare')">Branch Compare</button>
+    <button class="tab" onclick="sw('alerts')">Alerts <span id="abadge"></span></button>
+    <button class="tab" onclick="sw('theft')">Theft Insights</button>
+    <button class="tab" onclick="sw('setup')">Setup</button>
+  </div>
+  <div id="tab-drive" class="panel active">
+    <div class="sync-banner">
+      <div><h2>Google Drive Invoice Sync</h2><p>Staff upload photos to their branch/month folder. You sync here to extract data automatically.</p></div>
+      <button class="btn" id="signin-btn" onclick="signIn()" style="background:white;color:#1a1a1a;border:none;white-space:nowrap;padding:10px 16px;font-size:13px;font-weight:600">Sign in with Google</button>
+    </div>
+    <div id="drive-signed-out" class="card" style="text-align:center;padding:2rem">
+      <p style="font-size:14px;font-weight:500;margin-bottom:6px">Sign in to access your Drive folders</p>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:16px">Click Sign in with Google above</p>
+      <div style="background:var(--info-bg);border-radius:var(--radius);padding:12px;text-align:left;font-size:12px;color:var(--info)">
+        <strong>Folder structure:</strong><br>Invoice Uploads / Branch / Month<br><br>Staff upload to their branch + month folder. Branch and month are auto-detected when you sync.
+      </div>
+    </div>
+    <div id="drive-signed-in" style="display:none">
+      <div class="frow">
+        <button class="btn primary" onclick="loadAllBranches()" id="sync-btn">&#8635; Sync all branches</button>
+        <button class="btn" onclick="createMonthFolders()" id="create-btn">+ Create this month folders</button>
+        <button class="btn" onclick="openDriveFolder()">Open Drive &#8599;</button>
+        <select id="filter-branch" onchange="renderDriveTree()" style="padding:6px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)">
+          <option value="">All branches</option>
+          <option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option>
+        </select>
+      </div>
+      <div class="st" id="drive-st"></div>
+      <div class="progress" id="drive-prog"><div class="progress-bar" id="drive-bar"></div></div>
+      <div id="drive-files"></div>
+    </div>
+  </div>
+  <div id="tab-manual" class="panel">
+    <div class="card">
+      <p style="font-size:13px;font-weight:600;margin-bottom:14px">Add invoice manually</p>
+      <div class="g2">
+        <div class="field"><label>Branch *</label><select id="mb"><option value="">— Select —</option><option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option></select></div>
+        <div class="field"><label>Supplier *</label><input id="ms" placeholder="Supplier name"></div>
+        <div class="field"><label>Date *</label><input id="md" type="date"></div>
+        <div class="field"><label>Invoice no.</label><input id="mi" placeholder="INV-0001"></div>
+        <div class="field"><label>Total (incl. GST)</label><input id="mt" type="number" step="0.01" placeholder="0.00" oninput="calcGST()"></div>
+        <div class="field"><label>GST rate</label><select id="mgr" onchange="calcGST()"><option value="9">9%</option><option value="8">8%</option><option value="0">0%</option></select></div>
+        <div class="field"><label>GST amount</label><input id="mg" type="number" step="0.01" placeholder="0.00"></div>
+        <div class="field"><label>Subtotal (excl. GST)</label><input id="msub" type="number" step="0.01" placeholder="0.00"></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="mn" rows="2" placeholder="Optional remarks"></textarea></div>
+      <div style="margin-bottom:10px">
+        <p style="font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:7px">Line items</p>
+        <div id="mli"></div>
+        <button class="btn" style="margin-top:5px;font-size:11px" onclick="addLI()">+ Add item</button>
+      </div>
+      <div class="st" id="manst"></div>
+      <div style="display:flex;gap:8px"><button class="btn primary" onclick="saveManual()">Save entry</button><button class="btn" onclick="clearManual()">Clear</button></div>
+    </div>
+  </div>
+  <div id="tab-records" class="panel">
+    <div class="frow">
+      <select id="rb" onchange="renderRecords()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All branches</option><option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option></select>
+      <select id="rsup" onchange="renderRecords()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All suppliers</option></select>
+      <select id="rmo" onchange="renderRecords()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All months</option></select>
+      <select id="rsrc" onchange="renderRecords()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All sources</option><option value="drive">From Drive</option><option value="manual">Manual</option><option value="soa">SOA</option></select>
+      <input id="rsearch" placeholder="Search..." style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font);min-width:130px" oninput="renderRecords()">
+      <button class="btn" onclick="exportCSV()">Export CSV</button>
+    </div>
+    <div class="metrics" id="rmet"></div>
+    <div class="card" style="padding:0;overflow:hidden"><div id="rbody"></div></div>
+  </div>
+  <div id="tab-soa" class="panel">
+    <div class="card" style="margin-bottom:10px">
+      <p style="font-size:13px;font-weight:600;margin-bottom:10px">SOA Reconciliation</p>
+      <div class="g2" style="margin-bottom:10px">
+        <div class="field" style="margin-bottom:0"><label>Supplier</label><select id="soasup"><option value="">— Select —</option></select></div>
+        <div class="field" style="margin-bottom:0"><label>Branch</label><select id="soabr"><option value="">All branches</option><option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option></select></div>
+      </div>
+      <div style="border:1.5px dashed var(--border2);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;cursor:pointer;background:var(--bg2)" onclick="document.getElementById('soafi').click()">
+        <input type="file" id="soafi" accept="image/*,application/pdf" style="display:none" onchange="uploadSOA(this.files[0])">
+        <p style="font-size:13px;font-weight:500;margin-bottom:2px">Upload SOA image or PDF</p>
+        <p style="font-size:11px;color:var(--text3)">AI extracts all invoice lines automatically</p>
+      </div>
+      <div class="st" id="soast" style="margin-top:8px"></div>
+    </div>
+    <div id="soares"></div>
+  </div>
+  <div id="tab-items" class="panel">
+    <div class="frow">
+      <select id="itsup" onchange="renderItems()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All suppliers</option></select>
+      <select id="itbr" onchange="renderItems()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All branches</option><option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option></select>
+      <select id="itmo" onchange="renderItems()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All months</option></select>
+      <input id="itsearch" placeholder="Search item..." style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)" oninput="renderItems()">
+    </div>
+    <div id="itbody"></div>
+  </div>
+  <div id="tab-monthly" class="panel">
+    <div class="frow">
+      <select id="mnbr" onchange="renderMonthly()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All branches</option><option>NN Hillv2</option><option>NN NUH</option><option>NN Metro</option><option>NN West Coast</option><option>HC West Coast</option></select>
+      <select id="mnmo" onchange="renderMonthly()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All months</option></select>
+      <select id="mnyr" onchange="renderMonthly()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All years</option></select>
+    </div>
+    <div class="metrics" id="mnmet"></div>
+    <div id="mnbody"></div>
+  </div>
+  <div id="tab-compare" class="panel">
+    <div class="frow">
+      <select id="cmo" onchange="renderCompare()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All months</option></select>
+      <select id="csup" onchange="renderCompare()" style="padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--font)"><option value="">All suppliers</option></select>
+    </div>
+    <div id="cbody"></div>
+  </div>
+  <div id="tab-alerts" class="panel"><div id="albody"></div></div>
+  <div id="tab-theft" class="panel"><div id="thbody"></div></div>
+  <div id="tab-setup" class="panel">
+    <div class="setup-box">
+      <h3>Change PIN</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="password" id="new-pin" maxlength="4" placeholder="New 4-digit PIN" style="padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:13px;background:var(--bg);color:var(--text);font-family:var(--mono);width:140px;letter-spacing:0.2em" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+        <button class="btn primary" onclick="savePin()">Save PIN</button>
+        <span id="pin-saved" style="font-size:12px;color:var(--success);display:none">Saved!</span>
+      </div>
+    </div>
+    <div class="setup-box">
+      <h3>Google Sheets sync (optional)</h3>
+      <input id="gsurl" style="width:100%;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);font-family:var(--mono);margin-bottom:8px" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
+      <button class="btn primary" onclick="saveGS()">Save URL</button>
+      <p id="gsst" style="font-size:11px;margin-top:6px;color:var(--text2)"></p>
+    </div>
+    <div class="setup-box">
+      <h3>Staff folder link</h3>
+      <p>Share the correct branch folder link with each staff member:</p>
+      <div style="background:var(--bg);border-radius:var(--radius);padding:12px;font-size:12px;line-height:1.8;border:0.5px solid var(--border)">
+        1. Open <strong>Google Drive</strong> app<br>
+        2. Find your branch folder shared by owner<br>
+        3. Open the current month folder<br>
+        4. Tap + then Upload then select invoice photo
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+const CLIENT_ID='912370043447-dlq9611r90qrcidid4nbav2fabj5a4rm.apps.googleusercontent.com';
+const API_KEY='AIzaSyBdfrdNjOlEouFLcwWyqxesqYAF9X7z3v0';
+const FOLDER_ID='1XyXsg4R62aQLuuWgtIZ7VM2T0jMCjPOj';
+const PROXY='https://lucky-pike-26.ginataywl-del.deno.net';
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const BRANCHES=['NN Hillv2','NN NUH','NN Metro','NN West Coast','HC West Coast'];
+const S={invoices:[],alerts:[],gsUrl:'',tokenClient:null,accessToken:null,processedFiles:new Set(),soaLines:[],soaSupplier:''};
+let driveTree={};
+let pinEntry='',storedPin='1234',lic=0;
+try{const p=localStorage.getItem('owner_pin');if(p)storedPin=p;}catch(e){}
+try{const u=localStorage.getItem('gs_url');if(u){S.gsUrl=u;}}catch(e){}
+try{const pf=localStorage.getItem('processed_files');if(pf)S.processedFiles=new Set(JSON.parse(pf));}catch(e){}
+function pk(k){if(pinEntry.length>=4)return;pinEntry+=k;ud();if(pinEntry.length===4)setTimeout(chk,120);}
+function pb(){pinEntry=pinEntry.slice(0,-1);ud();}
+function pc(){pinEntry='';ud();}
+function ud(){for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('filled',i<pinEntry.length);}
+function chk(){if(pinEntry===storedPin){document.getElementById('pin-screen').style.display='none';document.getElementById('app').style.display='block';initG();}else{document.getElementById('pin-err').textContent='Incorrect PIN';pinEntry='';ud();setTimeout(()=>document.getElementById('pin-err').textContent='',2000);}}
+function lockApp(){document.getElementById('app').style.display='none';document.getElementById('pin-screen').style.display='flex';pinEntry='';ud();}
+function savePin(){const np=document.getElementById('new-pin').value;if(np.length!==4)return;storedPin=np;try{localStorage.setItem('owner_pin',np);}catch(e){}document.getElementById('pin-saved').style.display='inline';setTimeout(()=>document.getElementById('pin-saved').style.display='none',2000);}
+function saveGS(){S.gsUrl=document.getElementById('gsurl').value.trim();try{localStorage.setItem('gs_url',S.gsUrl);}catch(e){}document.getElementById('gsst').textContent=S.gsUrl?'Saved.':'';}
+function initG(){gapi.load('client',async()=>{await gapi.client.init({apiKey:API_KEY,discoveryDocs:['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']});S.tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:'https://www.googleapis.com/auth/drive',callback:(resp)=>{if(resp.error)return;S.accessToken=resp.access_token;gapi.client.setToken({access_token:resp.access_token});document.getElementById('drive-signed-out').style.display='none';document.getElementById('drive-signed-in').style.display='block';document.getElementById('signin-btn').textContent='Connected';document.getElementById('signin-btn').style.background='#d4edda';loadAllBranches();}});});}
+function signIn(){if(S.tokenClient)S.tokenClient.requestAccessToken({prompt:''});else setTimeout(signIn,500);}
+function openDriveFolder(){window.open('https://drive.google.com/drive/folders/'+FOLDER_ID,'_blank');}
+function formatSize(b){if(!b)return'';const k=b/1024;return k>1024?(k/1024).toFixed(1)+'MB':Math.round(k)+'KB';}
+function setSt(id,msg,type){const b=document.getElementById(id);if(!b)return;b.className='st '+type;b.textContent=msg;}
+function setP(pid,bid,pct){const p=document.getElementById(pid);const b=document.getElementById(bid);if(!p||!b)return;if(pct===null){p.classList.remove('on');return;}p.classList.add('on');b.style.width=pct+'%';}
+function parseDt(ds){if(!ds)return null;if(ds.includes('-')){const p=ds.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}const p=ds.split('/');return p.length===3?new Date(+p[2],+p[1]-1,+p[0]):null;}
+function fmtDt(d){if(!d)return'';const dt=typeof d==='string'?new Date(d):d;if(isNaN(dt))return'';return dt.getDate().toString().padStart(2,'0')+'/'+(dt.getMonth()+1).toString().padStart(2,'0')+'/'+dt.getFullYear();}
+function sw(n){const keys=['drive','manual','records','soa','items','monthly','compare','alerts','theft','setup'];document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',keys[i]===n));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');if(n==='records'){popF();renderRecords();}if(n==='items'){popF();renderItems();}if(n==='monthly'){popF();renderMonthly();}if(n==='compare'){popF();renderCompare();}if(n==='soa')popSOA();if(n==='alerts')renderAlerts();if(n==='theft')renderTheft();}
+function buildInv(ex,branch,source){const d=parseDt(ex.date);return{id:Date.now()+Math.random(),savedAt:new Date().toISOString(),source:source||'drive',branch,date:ex.date||'',month:d?MONTHS[d.getMonth()]:'',monthNum:d?d.getMonth():0,year:d?d.getFullYear():'',supplier:ex.supplier||'',invoiceNum:ex.invoiceNum||'',total:+ex.total||0,gst:+ex.gst||0,subtotal:+ex.subtotal||0,lineItems:ex.lineItems||[],notes:ex.notes||''};}
+async function pushGS(inv){if(!S.gsUrl)return;try{await fetch(S.gsUrl,{method:'POST',body:JSON.stringify({...inv,lineItems:JSON.stringify(inv.lineItems)})});}catch(e){}}
+function storeInv(inv){chkAlerts(inv);S.invoices.push(inv);updBadge();popF();pushGS(inv);}
+function chkAlerts(newInv){const prev=S.invoices.filter(i=>i.supplier===newInv.supplier&&i.branch===newInv.branch);newInv.lineItems.forEach(ni=>{if(!ni.unitPrice||!ni.desc)return;prev.forEach(pi=>pi.lineItems.forEach(p=>{if(p.desc&&ni.desc&&p.unitPrice>0){const w1=p.desc.toLowerCase().split(' ')[0],w2=ni.desc.toLowerCase().split(' ')[0];if(w1===w2){const chg=(ni.unitPrice-p.unitPrice)/p.unitPrice*100;if(chg>1)S.alerts.push({type:'up',branch:newInv.branch,supplier:newInv.supplier,item:ni.desc,prev:p.unitPrice,curr:ni.unitPrice,pct:chg.toFixed(1),date:newInv.date});}})));S.invoices.filter(i=>i.supplier===newInv.supplier&&i.branch!==newInv.branch).forEach(oi=>oi.lineItems.forEach(op=>{if(op.desc&&ni.desc&&op.unitPrice>0&&ni.unitPrice>0){const w1=op.desc.toLowerCase().split(' ')[0],w2=ni.desc.toLowerCase().split(' ')[0];if(w1===w2){const diff=Math.abs(ni.unitPrice-op.unitPrice)/Math.max(ni.unitPrice,op.unitPrice)*100;if(diff>5&&!S.alerts.find(a=>a.type==='diff'&&a.supplier===newInv.supplier&&a.item.toLowerCase().startsWith(w1)))S.alerts.push({type:'diff',supplier:newInv.supplier,item:ni.desc,branch:newInv.branch,branch2:oi.branch,price1:ni.unitPrice,price2:op.unitPrice,diff:diff.toFixed(1)});}}}));});}
+function updBadge(){const el=document.getElementById('abadge');if(S.alerts.length){el.textContent=S.alerts.length;el.style.cssText='display:inline-block;background:var(--danger-bg);color:var(--danger);border-radius:20px;padding:1px 6px;font-size:11px;margin-left:4px';}else el.textContent='';}
+function popF(){const years=[...new Set(S.invoices.map(i=>i.year).filter(Boolean))].sort();const months=[...new Set(S.invoices.map(i=>({m:i.monthNum,l:i.month})).filter(x=>x.l).map(x=>JSON.stringify(x)))].map(x=>JSON.parse(x)).sort((a,b)=>a.m-b.m);const suppliers=[...new Set(S.invoices.map(i=>i.supplier).filter(Boolean))].sort();['mnmo','cmo','itmo','rmo'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const c=s.value;s.innerHTML='<option value="">All months</option>'+months.map(m=>'<option value="'+m.m+'">'+m.l+'</option>').join('');s.value=c;});['mnyr'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const c=s.value;s.innerHTML='<option value="">All years</option>'+years.map(y=>'<option>'+y+'</option>').join('');s.value=c;});['itsup','csup','rsup'].forEach(id=>{const s=document.getElementById(id);if(!s)return;const c=s.value;s.innerHTML='<option value="">All suppliers</option>'+suppliers.map(sup=>'<option>'+sup+'</option>').join('');s.value=c;});}
+function popSOA(){const s=document.getElementById('soasup');const c=s.value;const sups=[...new Set(S.invoices.map(i=>i.supplier).filter(Boolean))].sort();s.innerHTML='<option value="">— Select —</option>'+sups.map(sup=>'<option>'+sup+'</option>').join('');s.value=c;}
+async function loadAllBranches(){setSt('drive-st','Loading branch folders...','info');setP('drive-prog','drive-bar',10);driveTree={};try{const res=await gapi.client.drive.files.list({q:"'"+FOLDER_ID+"' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false",fields:'files(id,name)',pageSize:20});const bfs=res.result.files||[];if(!bfs.length){setSt('drive-st','No branch folders found. Click + Create this month folders.','warn');setP('drive-prog','drive-bar',null);document.getElementById('drive-files').innerHTML='<div class="empty">No branch folders yet. Click <strong>+ Create this month folders</strong> to set up automatically.</div>';return;}setP('drive-prog','drive-bar',30);let prog=30;const step=60/bfs.length;for(const bf of bfs){driveTree[bf.name]={folderId:bf.id,months:{}};const mRes=await gapi.client.drive.files.list({q:"'"+bf.id+"' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false",fields:'files(id,name)',pageSize:20});for(const mf of mRes.result.files||[]){const fRes=await gapi.client.drive.files.list({q:"'"+mf.id+"' in parents and trashed=false and (mimeType contains 'image/' or mimeType='application/pdf')",fields:'files(id,name,mimeType,createdTime,size)',orderBy:'createdTime desc',pageSize:100});driveTree[bf.name].months[mf.name]={folderId:mf.id,files:fRes.result.files||[]};}prog+=step;setP('drive-prog','drive-bar',Math.round(prog));}setP('drive-prog','drive-bar',100);setTimeout(()=>setP('drive-prog','drive-bar',null),500);const tot=Object.values(driveTree).reduce((s,b)=>s+Object.values(b.months).reduce((ms,m)=>ms+m.files.length,0),0);const nw=Object.values(driveTree).reduce((s,b)=>s+Object.values(b.months).reduce((ms,m)=>ms+m.files.filter(f=>!S.processedFiles.has(f.id)).length,0),0);setSt('drive-st',tot+' files across '+bfs.length+' branches · '+nw+' new.','success');renderDriveTree();}catch(e){setP('drive-prog','drive-bar',null);setSt('drive-st','Error: '+e.message,'error');}}
+function renderDriveTree(){const c=document.getElementById('drive-files');const fb=document.getElementById('filter-branch').value;if(!Object.keys(driveTree).length){c.innerHTML='<div class="empty">Click Sync all branches to load files.</div>';return;}const totalNew=Object.entries(driveTree).filter(([br])=>!fb||br===fb).reduce((s,[,b])=>s+Object.values(b.months).reduce((ms,m)=>ms+m.files.filter(f=>!S.processedFiles.has(f.id)).length,0),0);let html='';if(totalNew>0)html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:10px 14px;background:var(--info-bg);border-radius:var(--radius)"><span style="font-size:12px;color:var(--info);font-weight:500">'+totalNew+' new invoice'+(totalNew>1?'s':'')+' ready</span><button class="btn primary" onclick="extractAllNew()" style="font-size:11px">Extract all new</button></div>';for(const [bn,bd] of Object.entries(driveTree).filter(([br])=>!fb||br===fb)){const me=Object.entries(bd.months).sort((a,b)=>b[0].localeCompare(a[0]));const bt=me.reduce((s,[,m])=>s+m.files.length,0);const bnw=me.reduce((s,[,m])=>s+m.files.filter(f=>!S.processedFiles.has(f.id)).length,0);html+='<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:13px;font-weight:600">'+bn+'</span>'+(bnw>0?'<span class="badge info">'+bnw+' new</span>':'')+'</div><div style="display:flex;gap:6px"><span style="font-size:11px;color:var(--text3)">'+bt+' files</span><button class="btn green" style="font-size:11px;padding:3px 9px" onclick="extractBranch(\''+bn+'\')">Extract branch</button></div></div>';if(!me.length)html+='<div style="padding:10px;background:var(--bg2);border-radius:var(--radius);font-size:12px;color:var(--text3)">No month folders yet</div>';else for(const [mn,md] of me){const nf=md.files.filter(f=>!S.processedFiles.has(f.id));const df=md.files.filter(f=>S.processedFiles.has(f.id));html+='<div style="border:0.5px solid var(--border);border-radius:var(--radius);margin-bottom:6px;overflow:hidden"><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg2);cursor:pointer" onclick="this.nextElementSibling.classList.toggle(\'open\')"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;font-weight:500">&#128193; '+mn+'</span>'+(nf.length>0?'<span class="badge info">'+nf.length+' new</span>':'')+(df.length>0?'<span class="badge ok">'+df.length+' done</span>':'')+'</div><div style="display:flex;align-items:center;gap:8px">'+(nf.length>0?'<button class="btn green" style="font-size:10px;padding:3px 8px" onclick="event.stopPropagation();extractMonth(\''+bn+'\',\''+mn+'\')">Extract</button>':'')+'<span style="font-size:10px;color:var(--text3)">&#9660;</span></div></div><div class="expand-body" style="padding:0">'+(md.files.length?md.files.map(f=>'<div class="gdrive-file" style="border-radius:0;border-left:none;border-right:none;border-top:none"><div style="display:flex;align-items:center;gap:8px;flex:1"><span style="font-size:16px">'+(f.mimeType.includes('pdf')?'&#128196;':'&#128247;')+'</span><div><div style="font-size:12px;font-weight:500">'+f.name+'</div><div style="font-size:11px;color:var(--text3)">'+new Date(f.createdTime).toLocaleDateString('en-SG')+' · '+formatSize(f.size)+'</div></div></div><div style="display:flex;gap:6px;align-items:center">'+(S.processedFiles.has(f.id)?'<span class="badge ok">Done</span>':'<span id="fst-'+f.id+'" style="font-size:11px;color:var(--text3)">Pending</span><button class="btn green" style="font-size:10px;padding:3px 8px" onclick="extractOne(\''+f.id+'\',\''+f.name+'\',\''+f.mimeType+'\',\''+bn+'\',\''+mn+'\')">Extract</button>')+'</div></div>').join(''):'<div style="padding:10px 12px;font-size:12px;color:var(--text3)">No files</div>')+'</div></div>';}html+='</div>';}c.innerHTML=html;}
+async function extractAllNew(){const fb=document.getElementById('filter-branch').value;const tasks=[];for(const [bn,bd] of Object.entries(driveTree)){if(fb&&bn!==fb)continue;for(const [mn,md] of Object.entries(bd.months)){for(const f of md.files){if(!S.processedFiles.has(f.id))tasks.push({f,bn,mn});}}}if(!tasks.length){setSt('drive-st','No new files.','warn');return;}setSt('drive-st','Extracting '+tasks.length+' invoices...','info');let saved=0,failed=0;for(let i=0;i<tasks.length;i++){const {f,bn,mn}=tasks[i];setP('drive-prog','drive-bar',Math.round(i/tasks.length*100));try{await extractOne(f.id,f.name,f.mimeType,bn,mn,true);saved++;}catch(e){failed++;}setSt('drive-st','Processing '+(i+1)+'/'+tasks.length+'...','info');}setP('drive-prog','drive-bar',100);setTimeout(()=>setP('drive-prog','drive-bar',null),500);setSt('drive-st',saved+' saved'+(failed?' · '+failed+' failed':'')+'.', failed?'warn':'success');popF();renderDriveTree();}
+async function extractBranch(bn){const bd=driveTree[bn];if(!bd)return;const tasks=[];for(const [mn,md] of Object.entries(bd.months)){for(const f of md.files){if(!S.processedFiles.has(f.id))tasks.push({f,mn});}}if(!tasks.length){setSt('drive-st','No new files in '+bn,'warn');return;}setSt('drive-st','Extracting from '+bn+'...','info');let saved=0,failed=0;for(const {f,mn} of tasks){try{await extractOne(f.id,f.name,f.mimeType,bn,mn,true);saved++;}catch(e){failed++;}}setSt('drive-st',bn+': '+saved+' saved'+(failed?' · '+failed+' failed':'')+'.', failed?'warn':'success');popF();renderDriveTree();}
+async function extractMonth(bn,mn){const md=driveTree[bn]?.months[mn];if(!md)return;const nf=md.files.filter(f=>!S.processedFiles.has(f.id));if(!nf.length){setSt('drive-st','No new files in '+mn,'warn');return;}let saved=0,failed=0;for(const f of nf){try{await extractOne(f.id,f.name,f.mimeType,bn,mn,true);saved++;}catch(e){failed++;}}setSt('drive-st',saved+' saved.', failed?'warn':'success');popF();renderDriveTree();}
+async function extractOne(fileId,fileName,mimeType,bn,mn,silent){const fst=document.getElementById('fst-'+fileId);if(fst){fst.textContent='Downloading...';fst.style.color='var(--info)';}try{const resp=await fetch('https://www.googleapis.com/drive/v3/files/'+fileId+'?alt=media',{headers:{Authorization:'Bearer '+S.accessToken}});const blob=await resp.blob();const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(blob);});const base64Data=b64.split(',')[1];const mime=mimeType||'image/jpeg';if(fst){fst.textContent='Extracting...';fst.style.color='var(--info)';}const aiResp=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mime,data:base64Data}},{type:'text',text:'Extract from this invoice. Return ONLY valid JSON:\n{"date":"DD/MM/YYYY","supplier":"name","invoiceNum":"ref","total":0,"gst":0,"subtotal":0,"lineItems":[{"desc":"item","qty":1,"unit":"","unitPrice":0,"amount":0}]}\nReturn ONLY the JSON.'}]}]})});const aiData=await aiResp.json();const txt=aiData.content.map(b=>b.text||'').join('').replace(/\`\`\`json|\`\`\`/g,'').trim();const ex=JSON.parse(txt);const inv=buildInv(ex,bn,'drive');if(!inv.month&&mn){const parts=mn.split(' ');if(parts.length>=2){inv.month=parts[1];const mi=MONTHS.indexOf(parts[1]);if(mi>=0)inv.monthNum=mi;}if(parts[0].includes('-'))inv.year=parts[0].split('-')[0];}inv.sourceFile=fileName;inv.sourcePath=bn+' / '+mn;storeInv(inv);S.processedFiles.add(fileId);try{localStorage.setItem('processed_files',JSON.stringify([...S.processedFiles]));}catch(e){}if(fst){fst.textContent='Saved';fst.style.color='var(--success)';}const btn=fst?.nextElementSibling;if(btn)btn.remove();return inv;}catch(e){if(fst){fst.textContent='Failed';fst.style.color='var(--danger)';}throw e;}}
+async function createMonthFolders(){const btn=document.getElementById('create-btn');btn.disabled=true;btn.textContent='Creating...';const now=new Date();const ms=now.getFullYear()+'-'+(now.getMonth()+1).toString().padStart(2,'0')+' '+MONTHS[now.getMonth()];setSt('drive-st','Creating folders for '+ms+'...','info');let created=0;try{const res=await gapi.client.drive.files.list({q:"'"+FOLDER_ID+"' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false",fields:'files(id,name)',pageSize:20});const existing={};(res.result.files||[]).forEach(f=>existing[f.name]=f.id);for(const br of BRANCHES){let bid=existing[br];if(!bid){const r=await gapi.client.drive.files.create({resource:{name:br,mimeType:'application/vnd.google-apps.folder',parents:[FOLDER_ID]},fields:'id'});bid=r.result.id;created++;}const mRes=await gapi.client.drive.files.list({q:"'"+bid+"' in parents and name='"+ms+"' and mimeType='application/vnd.google-apps.folder' and trashed=false",fields:'files(id)',pageSize:1});if(!(mRes.result.files||[]).length){await gapi.client.drive.files.create({resource:{name:ms,mimeType:'application/vnd.google-apps.folder',parents:[bid]},fields:'id'});created++;}}setSt('drive-st',created+' folders created. Resyncing...','success');await loadAllBranches();}catch(e){setSt('drive-st','Error: '+e.message,'error');}btn.disabled=false;btn.textContent='+ Create this month folders';}
+function calcGST(){const t=+document.getElementById('mt').value||0;const r=+document.getElementById('mgr').value||0;if(t>0&&r>0){const g=t*r/(100+r);document.getElementById('mg').value=g.toFixed(2);document.getElementById('msub').value=(t-g).toFixed(2);}}
+function addLI(data){lic++;const id='li'+lic;const row=document.createElement('div');row.className='li-row';row.id=id;row.innerHTML='<input placeholder="Item" value="'+(data?data.desc||'':'')+'" style="flex:2"><input placeholder="Qty" type="number" step="0.01" value="'+(data?data.qty||'':'')+'" style="width:55px;flex:none"><input placeholder="Unit" value="'+(data?data.unit||'':'')+'" style="width:55px;flex:none"><input placeholder="Unit $" type="number" step="0.01" value="'+(data?data.unitPrice||'':'')+'" style="width:65px;flex:none"><input placeholder="Amt" type="number" step="0.01" value="'+(data?data.amount||'':'')+'" style="width:70px;flex:none"><button class="del-btn" onclick="document.getElementById(\''+id+'\').remove()">x</button>';document.getElementById('mli').appendChild(row);}
+function getLIs(){return Array.from(document.querySelectorAll('#mli .li-row')).map(row=>{const ins=row.querySelectorAll('input');return{desc:ins[0].value,qty:+ins[1].value||1,unit:ins[2].value,unitPrice:+ins[3].value||0,amount:+ins[4].value||0};}).filter(l=>l.desc);}
+function clearManual(){['ms','mi','mn'].forEach(id=>document.getElementById(id).value='');['mt','mg','msub'].forEach(id=>document.getElementById(id).value='');document.getElementById('mb').value='';document.getElementById('md').value='';document.getElementById('mli').innerHTML='';setSt('manst','','');}
+function saveManual(){const branch=document.getElementById('mb').value;const sup=document.getElementById('ms').value.trim();const dr=document.getElementById('md').value;if(!branch){setSt('manst','Select a branch.','error');return;}if(!sup){setSt('manst','Supplier required.','error');return;}if(!dr){setSt('manst','Date required.','error');return;}const d=parseDt(dr);const inv={id:Date.now()+Math.random(),savedAt:new Date().toISOString(),source:'manual',branch,date:fmtDt(d),month:d?MONTHS[d.getMonth()]:'',monthNum:d?d.getMonth():0,year:d?d.getFullYear():'',supplier:sup,invoiceNum:document.getElementById('mi').value,total:+document.getElementById('mt').value||0,gst:+document.getElementById('mg').value||0,subtotal:+document.getElementById('msub').value||0,lineItems:getLIs(),notes:document.getElementById('mn').value};storeInv(inv);setSt('manst','Saved.','success');}
+function renderRecords(){const br=document.getElementById('rb').value;const sup=document.getElementById('rsup').value;const mo=document.getElementById('rmo').value;const src=document.getElementById('rsrc').value;const q=(document.getElementById('rsearch').value||'').toLowerCase();const invs=S.invoices.filter(i=>(!br||i.branch===br)&&(!sup||i.supplier===sup)&&(!mo||String(i.monthNum)===String(mo))&&(!src||i.source===src)&&(!q||i.supplier.toLowerCase().includes(q)||i.invoiceNum.toLowerCase().includes(q)));const mc=document.getElementById('rmet');const rb=document.getElementById('rbody');if(!invs.length){mc.innerHTML='';rb.innerHTML='<div class="empty">No records yet.</div>';return;}const tot=invs.reduce((s,i)=>s+i.total,0);const gst=invs.reduce((s,i)=>s+i.gst,0);mc.innerHTML='<div class="metric"><div class="mlabel">Total spend</div><div class="mval">$'+tot.toFixed(2)+'</div></div><div class="metric"><div class="mlabel">GST</div><div class="mval">$'+gst.toFixed(2)+'</div></div><div class="metric"><div class="mlabel">Invoices</div><div class="mval">'+invs.length+'</div></div><div class="metric"><div class="mlabel">Suppliers</div><div class="mval">'+[...new Set(invs.map(i=>i.supplier))].length+'</div></div>';rb.innerHTML='<div style="overflow-x:auto"><table><thead><tr><th>Src</th><th>Branch</th><th>Date</th><th>Supplier</th><th>Invoice</th><th style="text-align:right">Total</th><th>Month</th><th></th></tr></thead><tbody>'+invs.sort((a,b)=>b.id-a.id).map(inv=>'<tr><td><span class="src-tag src-'+inv.source+'">'+inv.source+'</span></td><td><span class="bpill" style="font-size:10px">'+inv.branch+'</span></td><td style="white-space:nowrap;font-size:11px">'+( inv.date||'—')+'</td><td style="font-weight:500;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+inv.supplier+'</td><td style="font-size:11px;color:var(--text2)">'+( inv.invoiceNum||'—')+'</td><td style="text-align:right;font-weight:500">$'+inv.total.toFixed(2)+'</td><td style="color:var(--text2);font-size:11px;white-space:nowrap">'+inv.month+' '+inv.year+'</td><td><button class="del-btn" onclick="delInv(\''+inv.id+'\')">x</button></td></tr>').join('')+'</tbody></table></div><div style="display:flex;justify-content:flex-end;gap:16px;padding:10px 12px;font-size:12px;color:var(--text2);border-top:0.5px solid var(--border)"><span>GST: <strong>$'+gst.toFixed(2)+'</strong></span><span>Total: <strong>$'+tot.toFixed(2)+'</strong></span></div>';}
+function delInv(id){S.invoices=S.invoices.filter(i=>String(i.id)!==String(id));popF();renderRecords();}
+function exportCSV(){if(!S.invoices.length)return;const h='Source,Branch,Date,Supplier,Invoice No,Total,GST,Subtotal,Month,Year\n';const rows=S.invoices.map(i=>[i.source,i.branch,i.date,i.supplier,i.invoiceNum,i.total.toFixed(2),i.gst.toFixed(2),i.subtotal.toFixed(2),i.month,i.year].join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h+rows],{type:'text/csv'}));a.download='invoices.csv';a.click();}
+async function uploadSOA(file){if(!file)return;setSt('soast','Reading SOA...','info');const reader=new FileReader();reader.onload=async e=>{try{const b64=e.target.result.split(',')[1];const r=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type||'image/jpeg',data:b64}},{type:'text',text:'Extract all invoice lines from this Statement of Account. Return ONLY valid JSON:\n{"supplierName":"name","lines":[{"invoiceNum":"INV-001","date":"DD/MM/YYYY","description":"","amount":0,"gst":0,"total":0}],"totalDue":0}\nReturn ONLY the JSON.'}]}]})});const d=await r.json();const txt=d.content.map(b=>b.text||'').join('').replace(/\`\`\`json|\`\`\`/g,'').trim();const ex=JSON.parse(txt);S.soaLines=ex.lines||[];S.soaSupplier=ex.supplierName||'';setSt('soast',S.soaLines.length+' lines extracted.','success');renderSOA();}catch(err){setSt('soast','Failed: '+err.message,'error');}};reader.readAsDataURL(file);}
+function renderSOA(){const c=document.getElementById('soares');if(!S.soaLines.length){c.innerHTML='';return;}const sup=document.getElementById('soasup').value||S.soaSupplier;const br=document.getElementById('soabr').value;const existing=new Set(S.invoices.filter(i=>(!sup||i.supplier===sup)&&(!br||i.branch===br)).map(i=>i.invoiceNum.trim().toUpperCase()).filter(Boolean));const missing=[];const matched=[];const extra=[];S.soaLines.forEach(line=>{const num=(line.invoiceNum||'').trim().toUpperCase();if(!num||!existing.has(num))missing.push(line);else matched.push(line);});S.invoices.filter(i=>(!sup||i.supplier===sup)&&(!br||i.branch===br)).forEach(inv=>{const num=inv.invoiceNum.trim().toUpperCase();if(num&&!S.soaLines.find(l=>(l.invoiceNum||'').trim().toUpperCase()===num))extra.push(inv);});const tSOA=S.soaLines.reduce((s,l)=>s+(+l.total||+l.amount||0),0);const tMiss=missing.reduce((s,l)=>s+(+l.total||+l.amount||0),0);let html='<div class="metrics"><div class="metric"><div class="mlabel">SOA total</div><div class="mval">$'+tSOA.toFixed(2)+'</div></div><div class="metric"><div class="mlabel">Matched</div><div class="mval" style="color:var(--success)">'+matched.length+'</div></div><div class="metric"><div class="mlabel">Missing</div><div class="mval" style="color:var(--danger)">'+missing.length+'</div><div class="msub">$'+tMiss.toFixed(2)+'</div></div><div class="metric"><div class="mlabel">Not on SOA</div><div class="mval" style="color:var(--warn)">'+extra.length+'</div></div></div>';if(missing.length){html+='<p style="font-size:11px;font-weight:500;color:var(--danger);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px">Missing from records</p>';html+=missing.map((line,idx)=>'<div class="soa-missing"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><div><span style="font-weight:600;font-size:13px;color:var(--danger)">'+(line.invoiceNum||'No inv no.')+'</span><span style="font-size:12px;color:var(--text2);margin-left:8px">'+(line.date||'')+'</span><div style="font-size:12px;color:var(--text2)">'+(line.description||'')+'</div></div><span style="font-weight:600;color:var(--danger)">$'+(+line.total||+line.amount||0).toFixed(2)+'</span></div><div style="display:flex;gap:8px"><button class="btn green" style="font-size:11px;padding:4px 10px" onclick="addSOAE('+idx+',\''+br+'\',\''+sup+'\')">Add to records</button><button class="btn" style="font-size:11px;padding:4px 10px" onclick="this.closest(\'.soa-missing\').remove()">Skip</button></div></div>').join('');}if(matched.length){html+='<p style="font-size:11px;font-weight:500;color:var(--success);text-transform:uppercase;letter-spacing:0.05em;margin:12px 0 6px">Matched</p>';html+=matched.map(l=>'<div class="soa-ok"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">'+(l.invoiceNum)+' · '+(l.date||'')+'</span><span style="font-weight:500">$'+(+l.total||+l.amount||0).toFixed(2)+'</span></div></div>').join('');}if(extra.length){html+='<p style="font-size:11px;font-weight:500;color:var(--warn);text-transform:uppercase;letter-spacing:0.05em;margin:12px 0 6px">In records, not on SOA</p>';html+=extra.map(inv=>'<div class="soa-extra"><div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:500">'+(inv.invoiceNum||'—')+' · '+inv.date+'</span><span style="font-weight:500">$'+inv.total.toFixed(2)+'</span></div></div>').join('');}c.innerHTML=html;}
+function addSOAE(idx,br,sup){const line=S.soaLines[idx];if(!line)return;const inv=buildInv({date:line.date,supplier:sup||S.soaSupplier||'From SOA',invoiceNum:line.invoiceNum,total:+line.total||+line.amount||0,gst:+line.gst||0,subtotal:(+line.total||+line.amount||0)-(+line.gst||0),lineItems:[{desc:line.description||'From SOA',qty:1,unit:'',unitPrice:0,amount:+line.total||+line.amount||0}]},br||BRANCHES[0],'soa');storeInv(inv);renderSOA();}
+function renderItems(){const sup=document.getElementById('itsup').value;const br=document.getElementById('itbr').value;const mo=document.getElementById('itmo').value;const q=(document.getElementById('itsearch').value||'').toLowerCase();const invs=S.invoices.filter(i=>(!sup||i.supplier===sup)&&(!br||i.branch===br)&&(!mo||String(i.monthNum)===String(mo)));const itemMap={};invs.forEach(inv=>inv.lineItems.forEach(li=>{if(!li.desc)return;if(q&&!li.desc.toLowerCase().includes(q))return;const key=li.desc+'|||'+inv.supplier;if(!itemMap[key])itemMap[key]={desc:li.desc,supplier:inv.supplier,totalQty:0,totalAmt:0,unitPrices:[],branches:{}};const it=itemMap[key];it.totalQty+=li.qty||1;it.totalAmt+=li.amount||0;if(li.unitPrice>0)it.unitPrices.push(li.unitPrice);it.branches[inv.branch]=(it.branches[inv.branch]||0)+(li.amount||0);}));const c=document.getElementById('itbody');if(!Object.keys(itemMap).length){c.innerHTML='<div class="empty">No items yet. Process Drive invoices to see breakdown.</div>';return;}const rows=Object.values(itemMap).sort((a,b)=>b.totalAmt-a.totalAmt);const maxA=rows[0]?.totalAmt||1;c.innerHTML='<div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table><thead><tr><th>Item</th><th>Supplier</th><th style="text-align:right">Total</th><th style="text-align:right">Avg unit $</th><th style="text-align:right">Qty</th><th>Branches</th><th>Variance</th></tr></thead><tbody>'+rows.map(it=>{const prices=it.unitPrices;const avgP=prices.length?prices.reduce((a,b)=>a+b,0)/prices.length:0;const maxP=prices.length?Math.max(...prices):0;const minP=prices.length?Math.min(...prices):0;const spread=maxP>0?(maxP-minP)/maxP*100:0;const cls=spread>15?'ts-high':spread>5?'ts-med':'ts-ok';const barW=Math.round(it.totalAmt/maxA*100);return'<tr><td><div style="font-weight:500">'+it.desc+'</div><div style="height:2px;background:var(--border);border-radius:2px;margin-top:3px"><div style="width:'+barW+'%;height:2px;background:var(--text);border-radius:2px"></div></div></td><td style="color:var(--text2)">'+it.supplier+'</td><td style="text-align:right;font-weight:500">$'+it.totalAmt.toFixed(2)+'</td><td style="text-align:right">$'+avgP.toFixed(2)+'</td><td style="text-align:right;color:var(--text2)">'+it.totalQty.toFixed(1)+'</td><td><span class="badge info">'+Object.keys(it.branches).length+'br</span></td><td><span class="'+cls+'">'+( spread>0?spread.toFixed(0)+'%':'—')+'</span></td></tr>';}).join('')+'</tbody></table></div></div>';}
+function renderMonthly(){const br=document.getElementById('mnbr').value;const mo=document.getElementById('mnmo').value;const yr=document.getElementById('mnyr').value;const invs=S.invoices.filter(i=>(!br||i.branch===br)&&(!mo||String(i.monthNum)===String(mo))&&(!yr||String(i.year)===yr));const mc=document.getElementById('mnmet');const mb=document.getElementById('mnbody');if(!invs.length){mc.innerHTML='';mb.innerHTML='<div class="empty">No data.</div>';return;}const tot=invs.reduce((s,i)=>s+i.total,0);mc.innerHTML='<div class="metric"><div class="mlabel">Total</div><div class="mval">$'+tot.toFixed(2)+'</div></div><div class="metric"><div class="mlabel">GST</div><div class="mval">$'+invs.reduce((s,i)=>s+i.gst,0).toFixed(2)+'</div></div><div class="metric"><div class="mlabel">Invoices</div><div class="mval">'+invs.length+'</div></div><div class="metric"><div class="mlabel">Suppliers</div><div class="mval">'+[...new Set(invs.map(i=>i.supplier))].length+'</div></div>';const bySup={};invs.forEach(i=>{if(!bySup[i.supplier])bySup[i.supplier]={total:0,gst:0,count:0,branches:{}};bySup[i.supplier].total+=i.total;bySup[i.supplier].gst+=i.gst;bySup[i.supplier].count++;bySup[i.supplier].branches[i.branch]=(bySup[i.supplier].branches[i.branch]||0)+i.total;});mb.innerHTML=Object.entries(bySup).sort((a,b)=>b[1].total-a[1].total).map(([name,s])=>{const pct=tot>0?(s.total/tot*100).toFixed(1):0;return'<div class="expand-head" onclick="this.nextElementSibling.classList.toggle(\'open\')"><div><span style="font-weight:500">'+name+'</span><span style="margin-left:8px;font-size:11px;color:var(--text2)">'+s.count+' inv · '+pct+'%</span></div><div><span style="font-weight:500">$'+s.total.toFixed(2)+'</span><span style="margin-left:6px;font-size:11px;color:var(--text2)">GST $'+s.gst.toFixed(2)+'</span><span style="margin-left:6px;color:var(--text3)">&#9660;</span></div></div><div class="expand-body"><div style="padding:4px 0 8px">'+Object.entries(s.branches).sort((a,b)=>b[1]-a[1]).map(([br,amt])=>'<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:0.5px solid var(--border)"><span>'+br+'</span><span style="font-weight:500">$'+amt.toFixed(2)+'</span></div>').join('')+'</div></div>';}).join('');}
+function renderCompare(){const mo=document.getElementById('cmo').value;const sup=document.getElementById('csup').value;const invs=S.invoices.filter(i=>(!mo||String(i.monthNum)===String(mo))&&(!sup||i.supplier===sup));const c=document.getElementById('cbody');if(!invs.length){c.innerHTML='<div class="empty">No data. Process invoices from multiple branches first.</div>';return;}const byBr={};BRANCHES.forEach(br=>{byBr[br]={total:0,count:0,items:{}};});invs.forEach(inv=>{if(!byBr[inv.branch])return;byBr[inv.branch].total+=inv.total;byBr[inv.branch].count++;inv.lineItems.forEach(li=>{if(!li.desc||!li.unitPrice)return;const k=li.desc.toLowerCase();if(!byBr[inv.branch].items[k])byBr[inv.branch].items[k]={desc:li.desc,prices:[]};byBr[inv.branch].items[k].prices.push(li.unitPrice);});});const active=BRANCHES.filter(br=>byBr[br].count>0);if(active.length<2){c.innerHTML='<div class="empty">Need data from at least 2 branches to compare.</div>';return;}const allItems={};active.forEach(br=>Object.keys(byBr[br].items).forEach(k=>{if(!allItems[k])allItems[k]={desc:byBr[br].items[k].desc,byBranch:{}};const ps=byBr[br].items[k].prices;allItems[k].byBranch[br]=ps.reduce((a,b)=>a+b,0)/ps.length;}));const anomalies=Object.values(allItems).filter(it=>{const ps=Object.values(it.byBranch);return ps.length>=2&&(Math.max(...ps)-Math.min(...ps))/Math.max(...ps)>0.05;}).sort((a,b)=>{const pa=Object.values(a.byBranch),pb=Object.values(b.byBranch);return((Math.max(...pb)-Math.min(...pb))/Math.max(...pb))-((Math.max(...pa)-Math.min(...pa))/Math.max(...pa));});let html='<div class="metrics">'+active.map(br=>'<div class="metric"><div class="mlabel" style="font-size:10px">'+br+'</div><div class="mval" style="font-size:15px">$'+byBr[br].total.toFixed(2)+'</div><div class="msub">'+byBr[br].count+' inv</div></div>').join('')+'</div>';if(anomalies.length){html+='<p style="font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px">Price differences across branches</p><div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table><thead><tr><th>Item</th>'+active.map(br=>'<th style="text-align:right;font-size:10px">'+br+'</th>').join('')+'<th style="text-align:right">Variance</th></tr></thead><tbody>'+anomalies.slice(0,20).map(it=>{const ps=Object.values(it.byBranch).filter(p=>p>0);const v=ps.length>1?(Math.max(...ps)-Math.min(...ps))/Math.max(...ps)*100:0;const cls=v>20?'ts-high':v>10?'ts-med':'ts-ok';return'<tr><td style="font-weight:500">'+it.desc+'</td>'+active.map(br=>{const p=it.byBranch[br];return'<td style="text-align:right">'+(p?'$'+p.toFixed(2):'—')+'</td>';}).join('')+'<td style="text-align:right"><span class="'+cls+'">'+v.toFixed(0)+'%</span></td></tr>';}).join('')+'</tbody></table></div></div>';}else html+='<div class="empty">No significant price differences found.</div>';c.innerHTML=html;}
+function renderAlerts(){const c=document.getElementById('albody');if(!S.alerts.length){c.innerHTML='<div class="empty">No alerts yet.</div>';return;}const up=S.alerts.filter(a=>a.type==='up');const diff=S.alerts.filter(a=>a.type==='diff');let html='';if(up.length){html+='<p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;color:var(--text2);margin-bottom:8px">Price increases</p>';html+=up.map(a=>'<div class="alert-item up"><div style="display:flex;justify-content:space-between"><div><span style="font-weight:500">'+a.supplier+'</span> <span class="bpill">'+a.branch+'</span><div style="font-size:12px;color:var(--text2);margin-top:2px">'+a.item+'</div></div><span class="badge danger">+'+a.pct+'%</span></div><div style="font-size:12px;color:var(--text2);margin-top:3px">$'+a.prev.toFixed(2)+' to $'+a.curr.toFixed(2)+' · '+a.date+'</div></div>').join('');}if(diff.length){html+='<p style="font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;color:var(--text2);margin:14px 0 8px">Price differences across branches</p>';html+=diff.map(a=>'<div class="alert-item diff"><div style="display:flex;justify-content:space-between"><div><span style="font-weight:500">'+a.supplier+'</span><div style="font-size:12px;color:var(--text2);margin-top:2px">'+a.item+'</div><div style="margin-top:4px"><span class="bpill">'+a.branch+'</span> $'+a.price1.toFixed(2)+' vs <span class="bpill">'+a.branch2+'</span> $'+a.price2.toFixed(2)+'</div></div><span class="badge warn">'+a.diff+'% diff</span></div></div>').join('');}c.innerHTML=html;}
+function renderTheft(){const c=document.getElementById('thbody');const tips=[{t:'Blind receiving',d:'Staff receiving goods should not see PO quantities. Record what arrives, manager matches to invoice.',r:'high'},{t:'Dual-signature approval',d:'Every invoice needs two signatures — receiver and manager.',r:'high'},{t:'Photo evidence at receiving',d:'Staff photograph deliveries before signing, especially proteins and seafood.',r:'med'},{t:'Monthly wastage reconciliation',d:'Compare ordered vs wastage recorded. Investigate large gaps.',r:'high'},{t:'Rotate supplier contacts',d:'Rotate who liaises with each supplier every quarter.',r:'med'},{t:'Surprise stock counts',d:'Unannounced physical counts reconciled against invoices.',r:'high'},{t:'Cross-branch benchmarking',d:'Use Branch Compare to flag when one branch pays more for the same item.',r:'high'},{t:'CCTV at receiving dock',d:'Coverage of receiving area, actively monitored.',r:'med'},{t:'Invoice sequencing checks',d:'Watch for duplicate invoice numbers from same supplier same day.',r:'high'},{t:'Par-level ordering alerts',d:'Flag orders exceeding 120% of expected par for approval.',r:'med'}];const flags=[];if(S.invoices.length>=2){const byBr={};BRANCHES.forEach(br=>{byBr[br]={total:0,count:0};});S.invoices.forEach(inv=>{if(byBr[inv.branch])byBr[inv.branch].total+=inv.total,byBr[inv.branch].count++;});const active=BRANCHES.filter(br=>byBr[br].count>0);const avg=active.length?active.reduce((s,br)=>s+byBr[br].total/byBr[br].count,0)/active.length:0;active.forEach(br=>{const pi=byBr[br].count>0?byBr[br].total/byBr[br].count:0;const dev=avg>0?Math.abs(pi-avg)/avg*100:0;if(dev>25)flags.push({branch:br,reason:'Avg invoice $'+pi.toFixed(2)+' — '+dev.toFixed(0)+'% above group avg',score:'high'});});S.alerts.filter(a=>a.type==='diff'&&+a.diff>20).forEach(a=>flags.push({branch:a.branch,reason:a.item+': '+a.diff+'% price diff vs '+a.branch2,score:+a.diff>30?'high':'med'}));}let html='';if(flags.length){html+='<p style="font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px">Anomaly flags</p>';html+=flags.map(f=>'<div class="alert-item" style="border-color:#7F77DD"><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><span class="ts-dot '+f.score+'"></span><span style="font-weight:500">'+f.branch+'</span><span class="badge '+(f.score==='high'?'danger':'warn')+'">'+(f.score==='high'?'High risk':'Medium')+'</span></div><div style="font-size:12px;color:var(--text2)">'+f.reason+'</div></div>').join('');html+='<div style="margin-bottom:14px"></div>';}html+='<div class="card"><p style="font-size:13px;font-weight:600;margin-bottom:12px">Theft deterrence</p>'+tips.map(t=>'<div style="display:flex;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--border)"><span class="ts-dot '+t.r+'" style="flex-shrink:0;margin-top:4px"></span><div><div style="font-size:12px;font-weight:500;margin-bottom:2px">'+t.t+'</div><div style="font-size:12px;color:var(--text2);line-height:1.6">'+t.d+'</div></div></div>').join('')+'</div>';c.innerHTML=html;}
+</script>
+</body>
+</html>`;
+
+const blob = new Blob([code], {type: 'text/html'});
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'owner.html';
+a.style.display = 'inline-block';
+a.style.padding = '16px 32px';
+a.style.background = '#1a1a1a';
+a.style.color = 'white';
+a.style.borderRadius = '8px';
+a.style.fontSize = '16px';
+a.style.fontWeight = '600';
+a.style.textDecoration = 'none';
+a.textContent = 'Download owner.html';
+document.body.appendChild(a);
+</script>
+</body>
+</html>
